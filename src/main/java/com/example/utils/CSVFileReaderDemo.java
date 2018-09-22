@@ -1,6 +1,5 @@
 package com.example.utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,10 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.util.ResourceUtils;
+
 public class CSVFileReaderDemo {
 	
 	public List<Map<String, String>> mapCsvToChildCare() throws FileNotFoundException, IOException{
-		try (InputStream in = new FileInputStream(new File("C:\\Puja\\Hackathon\\child-care.csv"));) {
+		
+		try (InputStream in = new FileInputStream(ResourceUtils.getFile("classpath:input/child-care.csv"));) {
 		    CSV csv = new CSV(true, ',', in );
 		    List< String > fieldNames = null;
 		    if (csv.hasNext()) fieldNames = new ArrayList<>(csv.next());
