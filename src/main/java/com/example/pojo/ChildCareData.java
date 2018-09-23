@@ -20,8 +20,26 @@ public class ChildCareData {
 	private String kgspace;
 	private String sgspace;
 	private String totspace;
+	private String subsidy;
+	private String gc_geoid;
+	private String longitude;
+	private String latitude;
+	private String run_date;
+	private String igvacant;
+	private String igwaitlist;
 	
-	
+	public String getIgvacant() {
+		return igvacant;
+	}
+	public void setIgvacant(String igvacant) {
+		this.igvacant = igvacant;
+	}
+	public String getIgwaitlist() {
+		return igwaitlist;
+	}
+	public void setIgwaitlist(String igwaitlist) {
+		this.igwaitlist = igwaitlist;
+	}
 	public String getLoc_id() {
 		return loc_id;
 	}
@@ -154,9 +172,4 @@ public class ChildCareData {
 	public void setRun_date(String run_date) {
 		this.run_date = run_date;
 	}
-	private String subsidy;
-	private String gc_geoid;
-	private String longitude;
-	private String latitude;
-	private String run_date;
 }

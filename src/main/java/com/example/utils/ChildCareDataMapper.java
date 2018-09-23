@@ -47,6 +47,8 @@ public class ChildCareDataMapper {
 		childData.setLongitude(item.get("LONGITUDE"));
 		childData.setLatitude(item.get("LATITUDE"));
 		childData.setRun_date(item.get("run_date"));
+		childData.setIgvacant(item.get("IGVacant"));
+		childData.setIgwaitlist(item.get("IGWaitlist"));
 		
 		childDataList.add(childData);
 		return childDataList;
