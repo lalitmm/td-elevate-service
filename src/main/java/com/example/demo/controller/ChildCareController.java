@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,11 @@ import com.example.pojo.ChildCareData;
 import com.example.utils.CSVFileReaderDemo;
 import com.example.utils.ChildCareDataMapper;
 
+@CrossOrigin(origins = "https://smartcommunities.cfapps.io")
 @RestController
 public class ChildCareController {
+	
+	private static List<ChildCareData> listOfObjects = new ArrayList<>();
 	
 	@RequestMapping(value = "/getAllData", method = RequestMethod.GET)
 	public ArrayList<TestData> getAllServiceProviders() throws FileNotFoundException, IOException {
@@ -59,12 +63,32 @@ public class ChildCareController {
 	public List<ChildCareData> getAllAvailableChildCareServiceProviders() throws FileNotFoundException, IOException {
 		CSVFileReaderDemo fileReader = new CSVFileReaderDemo();
 		ChildCareDataMapper dataMapper = new ChildCareDataMapper();
-		return dataMapper.convertCsvToJson(fileReader.mapCsvToChildCare("classpath:input/child-care-availability.csv"));
+		if(listOfObjects.isEmpty())
+		{
+			listOfObjects = dataMapper.convertCsvToJson(fileReader.mapCsvToChildCare("classpath:input/child-care-availability.csv"));
+		}
+		return listOfObjects;
 	}
 	
 	@RequestMapping(value = "/update/{loc_id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateAvailability(@RequestBody ChildCareData childCareData,
 			  @PathVariable("loc_id") String id) {
+		if(!listOfObjects.isEmpty()) {
+			for(ChildCareData childCare : listOfObjects) {
+				if(childCare.getLoc_id().equals(id)) {
+					childCare.setIgwaitlist(childCareData.getIgwaitlist());
+					childCare.setIgvacant(childCareData.getIgvacant());
+				}
+			}
+		}
 		return ResponseEntity.ok("resource saved");
+	}
+	
+	@RequestMapping(value = "/reset", method = RequestMethod.GET)
+	public List<ChildCareData> resetChildCareData() throws FileNotFoundException, IOException {
+		CSVFileReaderDemo fileReader = new CSVFileReaderDemo();
+		ChildCareDataMapper dataMapper = new ChildCareDataMapper();
+		listOfObjects = dataMapper.convertCsvToJson(fileReader.mapCsvToChildCare("classpath:input/child-care-availability.csv"));
+		return listOfObjects;
 	}
 }
