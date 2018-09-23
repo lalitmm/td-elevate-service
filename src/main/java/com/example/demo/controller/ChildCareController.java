@@ -49,6 +49,13 @@ public class ChildCareController {
 	public List<ChildCareData> getAllChildCareServiceProviders() throws FileNotFoundException, IOException {
 		CSVFileReaderDemo fileReader = new CSVFileReaderDemo();
 		ChildCareDataMapper dataMapper = new ChildCareDataMapper();
-		return dataMapper.convertCsvToJson(fileReader.mapCsvToChildCare());
+		return dataMapper.convertCsvToJson(fileReader.mapCsvToChildCare("classpath:input/child-care.csv"));
+	}
+	
+	@RequestMapping(value = "/availability", method = RequestMethod.GET)
+	public List<ChildCareData> getAllAvailableChildCareServiceProviders() throws FileNotFoundException, IOException {
+		CSVFileReaderDemo fileReader = new CSVFileReaderDemo();
+		ChildCareDataMapper dataMapper = new ChildCareDataMapper();
+		return dataMapper.convertCsvToJson(fileReader.mapCsvToChildCare("classpath:input/child-care-availability.csv"));
 	}
 }

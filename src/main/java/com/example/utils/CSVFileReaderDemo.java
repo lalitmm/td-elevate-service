@@ -13,9 +13,9 @@ import org.springframework.util.ResourceUtils;
 
 public class CSVFileReaderDemo {
 	
-	public List<Map<String, String>> mapCsvToChildCare() throws FileNotFoundException, IOException{
+	public List<Map<String, String>> mapCsvToChildCare(String path) throws FileNotFoundException, IOException{
 		
-		try (InputStream in = new FileInputStream(ResourceUtils.getFile("classpath:input/child-care.csv"));) {
+		try (InputStream in = new FileInputStream(ResourceUtils.getFile(path));) {
 		    CSV csv = new CSV(true, ',', in );
 		    List< String > fieldNames = null;
 		    if (csv.hasNext()) fieldNames = new ArrayList<>(csv.next());
