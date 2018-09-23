@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,5 +60,11 @@ public class ChildCareController {
 		CSVFileReaderDemo fileReader = new CSVFileReaderDemo();
 		ChildCareDataMapper dataMapper = new ChildCareDataMapper();
 		return dataMapper.convertCsvToJson(fileReader.mapCsvToChildCare("classpath:input/child-care-availability.csv"));
+	}
+	
+	@RequestMapping(value = "/update/{loc_id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateAvailability(@RequestBody ChildCareData childCareData,
+			  @PathVariable("loc_id") String id) {
+		return ResponseEntity.ok("resource saved");
 	}
 }

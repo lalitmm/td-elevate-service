@@ -2,7 +2,6 @@ package com.example.pojo;
 
 public class ChildCareData {
 	
-	
 	private String loc_id;
 	private String loc_name;
 	private String auspice;
