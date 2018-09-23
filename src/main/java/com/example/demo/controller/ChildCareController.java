@@ -18,7 +18,7 @@ import com.example.pojo.ChildCareData;
 import com.example.utils.CSVFileReaderDemo;
 import com.example.utils.ChildCareDataMapper;
 
-@CrossOrigin(origins = "https://smartcommunities.cfapps.io")
+@CrossOrigin(origins = "*", allowedHeaders = "*",  methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} )
 @RestController
 public class ChildCareController {
 	
@@ -36,18 +36,30 @@ public class ChildCareController {
 		data2.setService_name("Property Taxes & Utilities");
 		TestData data3 = new TestData();
 		data3.setService_id("3");
-		data3.setService_name("Tickets, Fines and Penalties");
+		data3.setService_name("Tickets, Fines & Penalties");
 		TestData data4 = new TestData();
 		data4.setService_id("4");
-		data4.setService_name("Water And Environment");
+		data4.setService_name("Water & Environment");
 		TestData data5 = new TestData();
 		data5.setService_id("5");
-		data5.setService_name("Transportation");
+		data5.setService_name("Permits & Licensing");
+		TestData data6 = new TestData();
+		data6.setService_id("6");
+		data6.setService_name("Building & Contruction");
+		TestData data7 = new TestData();
+		data7.setService_id("7");
+		data7.setService_name("Venues, Facilities & Bookings");
+		TestData data8 = new TestData();
+		data8.setService_id("8");
+		data8.setService_name("Streets, Parking & Transportation");
 		serviceProviders.add(data1);
 		serviceProviders.add(data2);
 		serviceProviders.add(data3);
 		serviceProviders.add(data4);
 		serviceProviders.add(data5);
+		serviceProviders.add(data6);
+		serviceProviders.add(data7);
+		serviceProviders.add(data8);
 		
 		return serviceProviders;
 	}
